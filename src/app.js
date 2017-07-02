@@ -8,7 +8,7 @@ import {
 
 import { ADD_COMPLETED_TODO } from './reducers/completedTodosReducer';
 import { addCompletedTodo } from './actions/completedTodosAction';
-
+import { postTodo, deleteTodo, updateTodo } from './actions/todoAction';
 import reducers from './reducers/index';
 
 const store = createStore(reducers);
@@ -20,7 +20,7 @@ store.subscribe(function() {
 //define reducers
 
 //dispatch action CREATE
-store.dispatch({type: POST_TODO, payload: [{
+store.dispatch(postTodo([{
   id: 1,
   title: "First Todo",
   text: "This is the first todo",
@@ -32,21 +32,19 @@ store.dispatch({type: POST_TODO, payload: [{
     text: 'This is the second todo',
     completed: false
   }
-]})
+]))
 
 // //dispatch another action DELETE
- store.dispatch({type: DELETE_TODO, payload: {id: 1}})
+
+ store.dispatch(deleteTodo({id: 1}))
 
 // //dispatch another action UPDATE
-store.dispatch({
-  type: UPDATE_TODO,
-  payload: {
+store.dispatch(updateTodo({
     id: 2,
     title: "New Second Todo",
     text: 'This is the second todo updated',
     completed: false
-  }
-})
+  }))
 
 //COMPLETED TODOS actions 
 store.dispatch(addCompletedTodo([{id: 1}]))

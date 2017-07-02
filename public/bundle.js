@@ -707,6 +707,8 @@ var _completedTodosReducer = __webpack_require__(26);
 
 var _completedTodosAction = __webpack_require__(27);
 
+var _todoAction = __webpack_require__(28);
+
 var _index = __webpack_require__(24);
 
 var _index2 = _interopRequireDefault(_index);
@@ -722,31 +724,29 @@ store.subscribe(function () {
 //define reducers
 
 //dispatch action CREATE
-store.dispatch({ type: _todosReducer.POST_TODO, payload: [{
-    id: 1,
-    title: "First Todo",
-    text: "This is the first todo",
-    completed: false
-  }, {
-    id: 2,
-    title: 'Second Todo',
-    text: 'This is the second todo',
-    completed: false
-  }] });
+store.dispatch((0, _todoAction.postTodo)([{
+  id: 1,
+  title: "First Todo",
+  text: "This is the first todo",
+  completed: false
+}, {
+  id: 2,
+  title: 'Second Todo',
+  text: 'This is the second todo',
+  completed: false
+}]));
 
 // //dispatch another action DELETE
-store.dispatch({ type: _todosReducer.DELETE_TODO, payload: { id: 1 } });
+
+store.dispatch((0, _todoAction.deleteTodo)({ id: 1 }));
 
 // //dispatch another action UPDATE
-store.dispatch({
-  type: _todosReducer.UPDATE_TODO,
-  payload: {
-    id: 2,
-    title: "New Second Todo",
-    text: 'This is the second todo updated',
-    completed: false
-  }
-});
+store.dispatch((0, _todoAction.updateTodo)({
+  id: 2,
+  title: "New Second Todo",
+  text: 'This is the second todo updated',
+  completed: false
+}));
 
 //COMPLETED TODOS actions 
 store.dispatch((0, _completedTodosAction.addCompletedTodo)([{ id: 1 }]));
@@ -1492,6 +1492,54 @@ var _completedTodosReducer = __webpack_require__(26);
 
 function addCompletedTodo(todo) {
   return { type: _completedTodosReducer.ADD_COMPLETED_TODO, payload: todo };
+}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.postTodo = postTodo;
+exports.deleteTodo = deleteTodo;
+exports.updateTodo = updateTodo;
+
+var _todosReducer = __webpack_require__(25);
+
+//Post a todo
+function postTodo(todo) {
+  return {
+    type: _todosReducer.POST_TODO, payload: [{
+      id: 1,
+      title: "First Todo",
+      text: "This is the first todo",
+      completed: false
+    }, {
+      id: 2,
+      title: 'Second Todo',
+      text: 'This is the second todo',
+      completed: false
+    }] };
+}
+
+//Delete a todo
+function deleteTodo(id) {
+  return {
+    type: _todosReducer.DELETE_TODO,
+    payload: id
+  };
+}
+
+//Update a todo
+function updateTodo(todo) {
+  return {
+    type: _todosReducer.UPDATE_TODO,
+    payload: todo
+  };
 }
 
 /***/ })
