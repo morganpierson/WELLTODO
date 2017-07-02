@@ -15,19 +15,7 @@ export function getTodos() {
 //Post a todo
 export function postTodo(todo) {
   return {
-    type: POST_TODO, payload: [{
-    id: 1,
-    title: "First Todo",
-    text: "This is the first todo",
-    completed: false
-    },
-    {
-      id: 2,
-      title: 'Second Todo',
-      text: 'This is the second todo',
-      completed: false
-    }
-  ]}
+    type: POST_TODO, payload: todo}
 }
 
 //Delete a todo

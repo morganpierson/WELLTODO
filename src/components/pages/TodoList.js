@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getTodos } from '../../actions/todoAction';
 import { Grid, Col, Row, Button } from 'react-bootstrap'
 import TodoItem from './TodoItem';
+import TodoForm from './TodoForm';
 
 class TodoList extends Component {
   componentDidMount() {
@@ -27,6 +28,9 @@ class TodoList extends Component {
     return (
      <Grid>
       <Row style={{marginTop: '15px'}}>
+        <Col xs={12} sm={6}>
+          <TodoForm />
+        </Col>
         {todos}
       </Row>
      </Grid>
