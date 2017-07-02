@@ -701,6 +701,10 @@ function compose() {
 
 var _redux = __webpack_require__(8);
 
+var _todosReducer = __webpack_require__(25);
+
+var _completedTodosReducer = __webpack_require__(26);
+
 var _index = __webpack_require__(24);
 
 var _index2 = _interopRequireDefault(_index);
@@ -719,7 +723,7 @@ store.subscribe(function () {
 //define reducers
 
 //dispatch action CREATE
-store.dispatch({ type: 'POST_TODO', payload: [{
+store.dispatch({ type: _todosReducer.POST_TODO, payload: [{
     id: 1,
     title: "First Todo",
     text: "This is the first todo",
@@ -732,11 +736,11 @@ store.dispatch({ type: 'POST_TODO', payload: [{
   }] });
 
 // //dispatch another action DELETE
-store.dispatch({ type: 'DELETE_TODO', payload: { id: 1 } });
+store.dispatch({ type: _todosReducer.DELETE_TODO, payload: { id: 1 } });
 
 // //dispatch another action UPDATE
 store.dispatch({
-  type: "UPDATE_TODO",
+  type: _todosReducer.UPDATE_TODO,
   payload: {
     id: 2,
     title: "New Second Todo",
@@ -746,7 +750,7 @@ store.dispatch({
 });
 
 //COMPLETED TODOS actions 
-store.dispatch({ type: 'ADD_TO_COMPLETED_TODOS', payload: [{ id: 1 }] });
+store.dispatch({ type: _completedTodosReducer.ADD_COMPLETED_TODO, payload: [{ id: 1 }] });
 
 /***/ }),
 /* 8 */
@@ -1373,12 +1377,16 @@ var _redux = __webpack_require__(8);
 
 var _todosReducer = __webpack_require__(25);
 
+var _completedTodosReducer = __webpack_require__(26);
+
 //combine reducers
-exports.default = (0, _redux.combineReducers)({
-  todos: _todosReducer.todosReducer
-});
+
 
 //import reducers to be combined
+exports.default = (0, _redux.combineReducers)({
+  todos: _todosReducer.todosReducer,
+  completedTodos: _completedTodosReducer.completedTodosReducer
+});
 
 /***/ }),
 /* 25 */
@@ -1397,17 +1405,21 @@ exports.todosReducer = todosReducer;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+var POST_TODO = exports.POST_TODO = 'POST_TODO';
+var DELETE_TODO = exports.DELETE_TODO = 'DELETE_TODO';
+var UPDATE_TODO = exports.UPDATE_TODO = 'UPDATE_TODO';
+
 function todosReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { todos: [] };
   var action = arguments[1];
 
   switch (action.type) {
-    case "POST_TODO":
+    case POST_TODO:
       return {
         todos: [].concat(_toConsumableArray(state.todos), _toConsumableArray(action.payload))
       };
 
-    case "DELETE_TODO":
+    case DELETE_TODO:
       //create copy of current list of books
       var currentTodoToDelete = [].concat(_toConsumableArray(state.todos));
       //determine at which index in books array is the book to be deleted
@@ -1417,7 +1429,7 @@ function todosReducer() {
       //use slice to delete book at specific index
       return { todos: [].concat(_toConsumableArray(currentTodoToDelete.slice(0, indexToDelete)), _toConsumableArray(currentTodoToDelete.slice(indexToDelete + 1))) };
 
-    case "UPDATE_TODO":
+    case UPDATE_TODO:
       //create copy of current list of books
       var currentTodoToUpdate = [].concat(_toConsumableArray(state.todos));
       //determine at which index in books array is the book to be updated
@@ -1436,6 +1448,34 @@ function todosReducer() {
   }
 }
 //create store
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.completedTodosReducer = completedTodosReducer;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var ADD_COMPLETED_TODO = exports.ADD_COMPLETED_TODO = 'ADD_COMPLETED_TODO';
+//create reducer for storage of completed todos
+function completedTodosReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { completedTodos: [] };
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'ADD_COMPLETED_TODO':
+      return { completedTodos: [].concat(_toConsumableArray(state.completedTodos), _toConsumableArray(action.payload)) };
+    default:
+      return state;
+  }
+}
 
 /***/ })
 /******/ ]);

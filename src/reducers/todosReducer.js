@@ -1,13 +1,17 @@
+export const POST_TODO = 'POST_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+
 export function todosReducer(state = {todos: []}, action) {
   switch(action.type){
-    case "POST_TODO":
+    case POST_TODO:
       return {
         todos: [...state.todos,
         ...action.payload
         ]
       };
 
-    case "DELETE_TODO":
+    case DELETE_TODO:
     //create copy of current list of books
     const currentTodoToDelete = [...state.todos]
     //determine at which index in books array is the book to be deleted
@@ -20,7 +24,7 @@ export function todosReducer(state = {todos: []}, action) {
     return {todos: [...currentTodoToDelete.slice(0, indexToDelete),
         ...currentTodoToDelete.slice(indexToDelete + 1)]}
 
-    case "UPDATE_TODO":
+    case UPDATE_TODO:
     //create copy of current list of books
     const currentTodoToUpdate = [...state.todos]
     //determine at which index in books array is the book to be updated

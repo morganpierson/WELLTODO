@@ -1,5 +1,12 @@
 "use strict"
 import { createStore } from 'redux';
+import { 
+  POST_TODO, 
+  DELETE_TODO, 
+  UPDATE_TODO 
+} from './reducers/todosReducer';
+
+import { ADD_COMPLETED_TODO } from './reducers/completedTodosReducer';
 
 //import combine reducers
 import reducers from './reducers/index';
@@ -13,7 +20,7 @@ store.subscribe(function() {
 //define reducers
 
 //dispatch action CREATE
-store.dispatch({type: 'POST_TODO', payload: [{
+store.dispatch({type: POST_TODO, payload: [{
   id: 1,
   title: "First Todo",
   text: "This is the first todo",
@@ -28,11 +35,11 @@ store.dispatch({type: 'POST_TODO', payload: [{
 ]})
 
 // //dispatch another action DELETE
- store.dispatch({type: 'DELETE_TODO', payload: {id: 1}})
+ store.dispatch({type: DELETE_TODO, payload: {id: 1}})
 
 // //dispatch another action UPDATE
 store.dispatch({
-  type: "UPDATE_TODO",
+  type: UPDATE_TODO,
   payload: {
     id: 2,
     title: "New Second Todo",
@@ -42,4 +49,4 @@ store.dispatch({
 })
 
 //COMPLETED TODOS actions 
-store.dispatch({type: 'ADD_TO_COMPLETED_TODOS', payload: [{id: 1}]})
+store.dispatch({type: ADD_COMPLETED_TODO, payload: [{id: 1}]})
