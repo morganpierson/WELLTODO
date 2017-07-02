@@ -1,0 +1,19 @@
+{
+  "name": "welltodoapp",
+  "version": "1.0.0",
+  "description": "Sample todo app for W&lt;3LL using Node/Express, React, Redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morganpierson/WELLTODO.git"
+  },
+  "author": "Morgan Pierson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morganpierson/WELLTODO/issues"
+  },
+  "homepage": "https://github.com/morganpierson/WELLTODO#readme"
+}
