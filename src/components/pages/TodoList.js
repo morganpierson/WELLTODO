@@ -16,14 +16,14 @@ class TodoList extends Component {
   render() {
     const todos = this.props.todos.map(todo => {
       return (
-        <Col xs={12} sm={6} md={4} key={todo._id}>
+        <Row xs={12} sm={6} md={4} key={todo._id}>
           <TodoItem 
             _id={todo._id}
             title={todo.title}
             text={todo.text}
             completed={todo.completed}
           />
-        </Col>
+        </Row>
       )
     })
     return (
@@ -35,8 +35,8 @@ class TodoList extends Component {
         <Col xs={12} sm={6}>
           <TodoForm />
         </Col>
-        {todos}
       </Row>
+      {todos}
      </Grid>
     )
   }

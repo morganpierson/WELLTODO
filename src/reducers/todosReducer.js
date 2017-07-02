@@ -5,18 +5,7 @@ export const TOGGLE_TODO = 'TOGGLE_TODO';
 import { GET_TODOS } from '../actions/todoAction';
 
 export function todosReducer(state = {todos: 
-  [{
-    _id: 1,
-    title: "First Todo",
-    text: "This is the first todo",
-    completed: false
-    },
-    {
-      _id: 2,
-      title: 'Second Todo',
-      text: 'This is the second todo',
-      completed: false
-    }
+  [
   ]
 }, action) {
   switch(action.type){
@@ -52,9 +41,6 @@ export function todosReducer(state = {todos:
       }
     )
 
-    console.log("ACTION ID: ", action._id)
-    console.log('CURRENT TODO TO UPDATE: ', currentTodoToUpdate)
-    console.log('CURRENT INDEX TO UPDATE: ', indexToUpdate)
     //create a new book object with new values and with same array index of the item we want to update/replace 
     const newTodoToUpdate = {
       ...currentTodoToUpdate[indexToUpdate],

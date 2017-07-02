@@ -9426,17 +9426,7 @@ var DELETE_TODO = exports.DELETE_TODO = 'DELETE_TODO';
 var UPDATE_TODO = exports.UPDATE_TODO = 'UPDATE_TODO';
 var TOGGLE_TODO = exports.TOGGLE_TODO = 'TOGGLE_TODO';
 function todosReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { todos: [{
-      _id: 1,
-      title: "First Todo",
-      text: "This is the first todo",
-      completed: false
-    }, {
-      _id: 2,
-      title: 'Second Todo',
-      text: 'This is the second todo',
-      completed: false
-    }]
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { todos: []
   };
   var action = arguments[1];
 
@@ -9466,9 +9456,6 @@ function todosReducer() {
         return todo._id === action._id;
       });
 
-      console.log("ACTION ID: ", action._id);
-      console.log('CURRENT TODO TO UPDATE: ', currentTodoToUpdate);
-      console.log('CURRENT INDEX TO UPDATE: ', indexToUpdate);
       //create a new book object with new values and with same array index of the item we want to update/replace 
       var newTodoToUpdate = _extends({}, currentTodoToUpdate[indexToUpdate], {
         completed: !currentTodoToUpdate[indexToUpdate].completed
@@ -32604,7 +32591,7 @@ var TodoList = function (_Component) {
     value: function render() {
       var todos = this.props.todos.map(function (todo) {
         return _react2.default.createElement(
-          _reactBootstrap.Col,
+          _reactBootstrap.Row,
           { xs: 12, sm: 6, md: 4, key: todo._id },
           _react2.default.createElement(_TodoItem2.default, {
             _id: todo._id,
@@ -32629,9 +32616,9 @@ var TodoList = function (_Component) {
             _reactBootstrap.Col,
             { xs: 12, sm: 6 },
             _react2.default.createElement(_TodoForm2.default, null)
-          ),
-          todos
-        )
+          )
+        ),
+        todos
       );
     }
   }]);
@@ -43566,13 +43553,21 @@ var TodoForm = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit() {
       //findDOMNode is the same as using this.refs.title.value
+      var title = this.props.title;
       var todo = [{
         title: (0, _reactDom.findDOMNode)(this.refs.title).value,
         text: (0, _reactDom.findDOMNode)(this.refs.text).value,
         completed: false
       }];
+      var todoIndex = this.props.todos.findIndex(function (todo) {
+        return title === todo.title;
+      });
+      if (todoIndex === -1) {
+        this.props.postTodo(todo);
+      } else {
+        alert('Please enter a unique todo!!!');
+      }
       //call the postTodo action creator to be dispatched to our reducers onClick
-      this.props.postTodo(todo);
     }
   }, {
     key: 'onDelete',
