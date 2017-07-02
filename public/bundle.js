@@ -9439,30 +9439,30 @@ function todosReducer() {
       };
 
     case DELETE_TODO:
-      //create copy of current list of books
+      //create copy of current list of todos
       var currentTodoToDelete = [].concat(_toConsumableArray(state.todos));
-      //determine at which index in books array is the book to be deleted
+      //determine at which index in todos array is the todo to be deleted
       var indexToDelete = currentTodoToDelete.findIndex(function (todo) {
         return todo.title == action.payload;
       });
-      //use slice to delete book at specific index
+      //use slice to delete todo at specific index
       return { todos: [].concat(_toConsumableArray(currentTodoToDelete.slice(0, indexToDelete)), _toConsumableArray(currentTodoToDelete.slice(indexToDelete + 1))) };
 
     case TOGGLE_TODO:
-      //create copy of current list of books
+      //create copy of current list of todo
       var currentTodoToUpdate = [].concat(_toConsumableArray(state.todos));
-      //determine at which index in books array is the book to be updated
+      //determine at which index in todos array is the todo to be updated
       var indexToUpdate = currentTodoToUpdate.findIndex(function (todo) {
         return todo._id === action._id;
       });
 
-      //create a new book object with new values and with same array index of the item we want to update/replace 
+      //create a new todo object with new values and with same array index of the item we want to update/replace 
       var newTodoToUpdate = _extends({}, currentTodoToUpdate[indexToUpdate], {
         completed: !currentTodoToUpdate[indexToUpdate].completed
       });
 
       var todoUpdate = [].concat(_toConsumableArray(currentTodoToUpdate.slice(0, indexToUpdate)), [newTodoToUpdate], _toConsumableArray(currentTodoToUpdate.slice(indexToUpdate + 1)));
-      //use slice to remove the book at the specified index, replace with the new object and concat with rest of items in array 
+      //use slice to remove the todo at the specified index, replace with the new object and concat with rest of items in array 
       return _extends({}, state, {
         todos: todoUpdate });
     default:

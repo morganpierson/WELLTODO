@@ -19,36 +19,36 @@ export function todosReducer(state = {todos:
       };
 
     case DELETE_TODO:
-    //create copy of current list of books
+    //create copy of current list of todos
     const currentTodoToDelete = [...state.todos]
-    //determine at which index in books array is the book to be deleted
+    //determine at which index in todos array is the todo to be deleted
     const indexToDelete = currentTodoToDelete.findIndex(
       function(todo){
         return todo.title == action.payload
       }
     )
-    //use slice to delete book at specific index
+    //use slice to delete todo at specific index
     return {todos: [...currentTodoToDelete.slice(0, indexToDelete),
         ...currentTodoToDelete.slice(indexToDelete + 1)]};
         
     case TOGGLE_TODO:
-      //create copy of current list of books
+      //create copy of current list of todo
     const currentTodoToUpdate = [...state.todos]
-    //determine at which index in books array is the book to be updated
+    //determine at which index in todos array is the todo to be updated
     const indexToUpdate = currentTodoToUpdate.findIndex(
       function(todo){
         return todo._id === action._id
       }
     )
 
-    //create a new book object with new values and with same array index of the item we want to update/replace 
+    //create a new todo object with new values and with same array index of the item we want to update/replace 
     const newTodoToUpdate = {
       ...currentTodoToUpdate[indexToUpdate],
       completed: !currentTodoToUpdate[indexToUpdate].completed
     }
 
     let todoUpdate = [...currentTodoToUpdate.slice(0, indexToUpdate), newTodoToUpdate, ...currentTodoToUpdate.slice(indexToUpdate + 1)]
-    //use slice to remove the book at the specified index, replace with the new object and concat with rest of items in array 
+    //use slice to remove the todo at the specified index, replace with the new object and concat with rest of items in array 
     return {...state,
       todos: todoUpdate}
     default:
