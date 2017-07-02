@@ -1,5 +1,8 @@
 "use strict"
+import React from 'react';
+import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import { 
   POST_TODO, 
@@ -11,42 +14,48 @@ import { ADD_COMPLETED_TODO } from './reducers/completedTodosReducer';
 import { addCompletedTodo } from './actions/completedTodosAction';
 import { postTodo, deleteTodo, updateTodo } from './actions/todoAction';
 import reducers from './reducers/index';
+import TodoList from './components/pages/TodoList';
 
-const middleware = applyMiddleware(logger)
+const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
+
+render(
+  <Provider store={store}>
+    <TodoList />
+  </Provider>, 
+  document.getElementById('app')
+  );
 //create and dispatch actions
-// store.subscribe(function() {
-//   console.log('The current state is', store.getState())
-// })
+
 //define reducers
 
 //dispatch action CREATE
-store.dispatch(postTodo([{
-  id: 1,
-  title: "First Todo",
-  text: "This is the first todo",
-  completed: false
-  },
-  {
-    id: 2,
-    title: 'Second Todo',
-    text: 'This is the second todo',
-    completed: false
-  }
-]))
+// store.dispatch(postTodo([{
+//   id: 1,
+//   title: "First Todo",
+//   text: "This is the first todo",
+//   completed: false
+//   },
+//   {
+//     id: 2,
+//     title: 'Second Todo',
+//     text: 'This is the second todo',
+//     completed: false
+//   }
+// ]))
 
 // //dispatch another action DELETE
 
- store.dispatch(deleteTodo({id: 1}))
+//  store.dispatch(deleteTodo({id: 1}))
 
-// //dispatch another action UPDATE
-store.dispatch(updateTodo({
-    id: 2,
-    title: "New Second Todo",
-    text: 'This is the second todo updated',
-    completed: false
-  }))
+// // //dispatch another action UPDATE
+// store.dispatch(updateTodo({
+//     id: 2,
+//     title: "New Second Todo",
+//     text: 'This is the second todo updated',
+//     completed: false
+//   }))
 
-//COMPLETED TODOS actions 
-store.dispatch(addCompletedTodo([{id: 1}]))
+// //COMPLETED TODOS actions 
+// store.dispatch(addCompletedTodo([{id: 1}]))

@@ -4,6 +4,14 @@ import {
   DELETE_TODO, 
   UPDATE_TODO 
 } from '../reducers/todosReducer'
+export const GET_TODOS = 'GET_TODOS';
+//Get todos
+export function getTodos() {
+  return {
+    type: GET_TODOS
+  }
+}
+
 //Post a todo
 export function postTodo(todo) {
   return {

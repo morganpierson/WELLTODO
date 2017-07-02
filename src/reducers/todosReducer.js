@@ -1,9 +1,25 @@
 export const POST_TODO = 'POST_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
-
-export function todosReducer(state = {todos: []}, action) {
+import { GET_TODOS } from '../actions/todoAction';
+export function todosReducer(state = {todos: 
+  [{
+    id: 1,
+    title: "First Todo",
+    text: "This is the first todo",
+    completed: false
+    },
+    {
+      id: 2,
+      title: 'Second Todo',
+      text: 'This is the second todo',
+      completed: false
+    }
+  ]
+}, action) {
   switch(action.type){
+    case GET_TODOS:
+      return {...state, todos: [...state.todos]}
     case POST_TODO:
       return {
         todos: [...state.todos,
