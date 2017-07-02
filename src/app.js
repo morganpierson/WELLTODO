@@ -1,5 +1,6 @@
 "use strict"
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 import { 
   POST_TODO, 
   DELETE_TODO, 
@@ -11,12 +12,13 @@ import { addCompletedTodo } from './actions/completedTodosAction';
 import { postTodo, deleteTodo, updateTodo } from './actions/todoAction';
 import reducers from './reducers/index';
 
-const store = createStore(reducers);
+const middleware = applyMiddleware(logger)
+const store = createStore(reducers, middleware);
 
 //create and dispatch actions
-store.subscribe(function() {
-  console.log('The current state is', store.getState())
-})
+// store.subscribe(function() {
+//   console.log('The current state is', store.getState())
+// })
 //define reducers
 
 //dispatch action CREATE

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/morganpierson/WELLTODO#readme",
   "devDependencies": {
+    "redux-logger": "^3.0.6",
     "webpack": "^3.0.0"
   },
   "dependencies": {
