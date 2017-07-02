@@ -1,4 +1,4 @@
-const path = require('path');
+let path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
   },
-  watch: true, //webpack recompile bundle if any changes made
+  watch: true, 
   module: {
     loaders: [
       {
