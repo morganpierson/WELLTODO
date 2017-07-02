@@ -7,8 +7,8 @@ import {
 } from './reducers/todosReducer';
 
 import { ADD_COMPLETED_TODO } from './reducers/completedTodosReducer';
+import { addCompletedTodo } from './actions/completedTodosAction';
 
-//import combine reducers
 import reducers from './reducers/index';
 
 const store = createStore(reducers);
@@ -49,4 +49,4 @@ store.dispatch({
 })
 
 //COMPLETED TODOS actions 
-store.dispatch({type: ADD_COMPLETED_TODO, payload: [{id: 1}]})
+store.dispatch(addCompletedTodo([{id: 1}]))

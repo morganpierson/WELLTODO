@@ -705,6 +705,8 @@ var _todosReducer = __webpack_require__(25);
 
 var _completedTodosReducer = __webpack_require__(26);
 
+var _completedTodosAction = __webpack_require__(27);
+
 var _index = __webpack_require__(24);
 
 var _index2 = _interopRequireDefault(_index);
@@ -714,9 +716,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_index2.default);
 
 //create and dispatch actions
-
-
-//import combine reducers
 store.subscribe(function () {
   console.log('The current state is', store.getState());
 });
@@ -750,7 +749,7 @@ store.dispatch({
 });
 
 //COMPLETED TODOS actions 
-store.dispatch({ type: _completedTodosReducer.ADD_COMPLETED_TODO, payload: [{ id: 1 }] });
+store.dispatch((0, _completedTodosAction.addCompletedTodo)([{ id: 1 }]));
 
 /***/ }),
 /* 8 */
@@ -1475,6 +1474,24 @@ function completedTodosReducer() {
     default:
       return state;
   }
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addCompletedTodo = addCompletedTodo;
+
+var _completedTodosReducer = __webpack_require__(26);
+
+function addCompletedTodo(todo) {
+  return { type: _completedTodosReducer.ADD_COMPLETED_TODO, payload: todo };
 }
 
 /***/ })
