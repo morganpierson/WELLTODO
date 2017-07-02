@@ -5,6 +5,7 @@ import { getTodos } from '../../actions/todoAction';
 import { Grid, Col, Row, Button } from 'react-bootstrap'
 import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
+import CompletedTodos from './CompletedTodos';
 
 class TodoList extends Component {
   componentDidMount() {
@@ -15,9 +16,9 @@ class TodoList extends Component {
   render() {
     const todos = this.props.todos.map(todo => {
       return (
-        <Col xs={12} sm={6} md={4} key={todo.id}>
+        <Col xs={12} sm={6} md={4} key={todo._id}>
           <TodoItem 
-            id={todo.id}
+            _id={todo._id}
             title={todo.title}
             text={todo.text}
             completed={todo.completed}
@@ -27,7 +28,10 @@ class TodoList extends Component {
     })
     return (
      <Grid>
-      <Row style={{marginTop: '15px'}}>
+     <Row>
+      <CompletedTodos />
+     </Row>
+      <Row style={{marginTop: '15px'}} >
         <Col xs={12} sm={6}>
           <TodoForm />
         </Col>

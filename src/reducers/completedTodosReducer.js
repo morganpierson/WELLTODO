@@ -4,7 +4,7 @@ export const ADD_COMPLETED_TODO = 'ADD_COMPLETED_TODO'
 export function completedTodosReducer(state = {completedTodos:[]}, action) {
   switch(action.type) {
     case 'ADD_COMPLETED_TODO':
-      return {completedTodos: [...state.completedTodos, ...action.payload]}
+      return {completedTodos: [...state, ...action.payload]}
     default:
       return state
   }

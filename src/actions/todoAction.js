@@ -2,7 +2,8 @@
 import { 
   POST_TODO, 
   DELETE_TODO, 
-  UPDATE_TODO 
+  UPDATE_TODO, 
+  TOGGLE_TODO 
 } from '../reducers/todosReducer'
 export const GET_TODOS = 'GET_TODOS';
 //Get todos
@@ -19,10 +20,20 @@ export function postTodo(todo) {
 }
 
 //Delete a todo
-export function deleteTodo(id) {
+export function deleteTodo(title) {
   return {
     type: DELETE_TODO, 
-    payload: id
+    payload: title
+  }
+}
+
+//Toggle a todo
+export function toggleTodo(_id, completed) {
+  return {
+    type: TOGGLE_TODO,
+    _id: _id,
+    completed: completed
+    
   }
 }
 
@@ -30,6 +41,9 @@ export function deleteTodo(id) {
 export function updateTodo(todo) {
   return {
   type: UPDATE_TODO,
-  payload: todo
+  payload: {
+    _id: action.payload._id,
+    completed: action.payload.completed
+  }
   }
 }

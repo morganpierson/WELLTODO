@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {findDOMNode} from 'react-dom';
 
-import { postTodo } from '../../actions/todoAction';
+import { postTodo, deleteTodo } from '../../actions/todoAction';
 
 class TodoForm extends Component {
   handleSubmit() {
@@ -25,7 +25,21 @@ class TodoForm extends Component {
     this.props.postTodo(todo)
   }
 
+  onDelete() {
+      let todoId = findDOMNode(this.refs.delete).value;
+
+      this.props.deleteTodo(todoId)
+    }
+
+
   render() {
+    const listOfTodos = this.props.todos.map(todo => {
+      return (
+        <option key={todo._id}>{todo.title}</option>
+      )
+    })
+
+    
     return( 
       <Well>
         <Panel>
@@ -47,13 +61,31 @@ class TodoForm extends Component {
           </FormGroup>
           <Button onClick={this.handleSubmit.bind(this)} bsStyle='primary'>Save Todo</Button>
         </Panel>
+        <Panel>
+          <FormGroup controlId="formControlsSelect">
+          <ControlLabel>Select a todo to delete</ControlLabel>
+          <FormControl ref='delete' componentClass="select" placeholder="select">
+            <option value="select">select</option>
+            {listOfTodos}
+          </FormControl>
+        </FormGroup>
+        <Button 
+        onClick={this.onDelete.bind(this)}
+        bsStyle='danger'>Delete</Button>
+        </Panel>
       </Well>
     )
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({postTodo}, dispatch)
+  return bindActionCreators({postTodo,deleteTodo}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(TodoForm);
+function mapStateToProps(state) {
+  return {
+    todos: state.todos.todos
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoForm);
