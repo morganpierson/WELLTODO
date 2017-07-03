@@ -4792,9 +4792,9 @@ function getTodos() {
 //Post a todo
 function postTodo(todo) {
   return {
-    type: _todosReducer.POST_TODO, payload: todo };
+    type: _todosReducer.POST_TODO, payload: todo
+  };
 }
-
 //Delete a todo
 function deleteTodo(title) {
   return {
@@ -32599,6 +32599,7 @@ var TodoList = function (_Component) {
     key: 'render',
     value: function render() {
       var todos = this.props.todos.map(function (todo) {
+        console.log(todo);
         return _react2.default.createElement(
           _reactBootstrap.Row,
           { xs: 12, sm: 6, md: 4, key: todo._id },
@@ -43460,6 +43461,7 @@ var TodoItem = function (_Component) {
         text: this.props.text,
         completed: this.props.completed
       }]);
+      console.log(todo);
       this.props.toggleTodo(_id, !completed);
     }
   }, {
@@ -43562,19 +43564,23 @@ var TodoForm = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit() {
       //findDOMNode is the same as using this.refs.title.value
-      var title = this.props.title;
+      var _id = (0, _reactDom.findDOMNode)(this.refs.title).value;
       var todo = [{
+        _id: (0, _reactDom.findDOMNode)(this.refs.title).value,
         title: (0, _reactDom.findDOMNode)(this.refs.title).value,
         text: (0, _reactDom.findDOMNode)(this.refs.text).value,
         completed: false
       }];
       var todoIndex = this.props.todos.findIndex(function (todo) {
-        return title === todo.title;
+        return _id === todo._id;
       });
-
-      this.props.postTodo(todo);
-      (0, _reactDom.findDOMNode)(this.refs.title).value = '';
-      (0, _reactDom.findDOMNode)(this.refs.text).value = '';
+      if (todoIndex === -1) {
+        this.props.postTodo(todo);
+        (0, _reactDom.findDOMNode)(this.refs.title).value = '';
+        (0, _reactDom.findDOMNode)(this.refs.text).value = '';
+      } else {
+        alert('Please enter a unique todo title!!!');
+      }
       //call the postTodo action creator to be dispatched to our reducers onClick
     }
   }, {
@@ -43854,20 +43860,6 @@ var Menu = function (_Component) {
               _reactBootstrap.NavItem,
               { eventKey: 2, href: '/conact' },
               'Contact'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Nav,
-            { pullRight: true },
-            _react2.default.createElement(
-              _reactBootstrap.NavItem,
-              { eventKey: 1, href: '/admin' },
-              'Admin'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.NavItem,
-              { eventKey: 2, href: '/cart' },
-              'Your cart'
             )
           )
         )

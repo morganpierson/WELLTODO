@@ -16,6 +16,7 @@ class TodoItem extends Component {
       text: this.props.text,
       completed: this.props.completed
     }]
+    console.log(todo)
     this.props.toggleTodo(_id, !completed)
   }
 

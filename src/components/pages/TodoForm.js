@@ -16,19 +16,23 @@ import { postTodo, deleteTodo } from '../../actions/todoAction';
 class TodoForm extends Component {
   handleSubmit() {
     //findDOMNode is the same as using this.refs.title.value
-    let title = this.props.title
+    let _id = findDOMNode(this.refs.title).value
     const todo = [{
+      _id: findDOMNode(this.refs.title).value,
       title: findDOMNode(this.refs.title).value,
       text: findDOMNode(this.refs.text).value,
       completed: false
     }]
     let todoIndex = this.props.todos.findIndex(todo => {
-      return title === todo.title
+      return _id === todo._id
     })
-    
+    if(todoIndex === -1) {
       this.props.postTodo(todo)
       findDOMNode(this.refs.title).value = '';
-      findDOMNode(this.refs.text).value = '';
+      findDOMNode(this.refs.text).value = ''
+    } else {
+      alert('Please enter a unique todo title!!!')
+    }
     //call the postTodo action creator to be dispatched to our reducers onClick
     
   }

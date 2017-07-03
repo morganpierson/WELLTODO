@@ -16,9 +16,9 @@ export function getTodos() {
 //Post a todo
 export function postTodo(todo) {
   return {
-    type: POST_TODO, payload: todo}
+    type: POST_TODO, payload: todo
 }
-
+}
 //Delete a todo
 export function deleteTodo(title) {
   return {
