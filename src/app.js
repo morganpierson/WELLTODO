@@ -15,14 +15,18 @@ import { addCompletedTodo } from './actions/completedTodosAction';
 import { postTodo, deleteTodo, updateTodo } from './actions/todoAction';
 import reducers from './reducers/index';
 import TodoList from './components/pages/TodoList';
-
+import Menu from './components/menu';
 const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
 
 render(
   <Provider store={store}>
+    <div> 
+    <Menu />
     <TodoList />
+    </div>
+    
   </Provider>, 
   document.getElementById('app')
   );
