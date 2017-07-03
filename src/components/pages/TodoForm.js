@@ -25,11 +25,10 @@ class TodoForm extends Component {
     let todoIndex = this.props.todos.findIndex(todo => {
       return title === todo.title
     })
-    if(todoIndex === -1) {
+    
       this.props.postTodo(todo)
-    } else {
-      alert('Please enter a unique todo!!!')
-    }
+      findDOMNode(this.refs.title).value = '';
+      findDOMNode(this.refs.text).value = '';
     //call the postTodo action creator to be dispatched to our reducers onClick
     
   }

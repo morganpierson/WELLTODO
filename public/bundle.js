@@ -43562,11 +43562,10 @@ var TodoForm = function (_Component) {
       var todoIndex = this.props.todos.findIndex(function (todo) {
         return title === todo.title;
       });
-      if (todoIndex === -1) {
-        this.props.postTodo(todo);
-      } else {
-        alert('Please enter a unique todo!!!');
-      }
+
+      this.props.postTodo(todo);
+      (0, _reactDom.findDOMNode)(this.refs.title).value = '';
+      (0, _reactDom.findDOMNode)(this.refs.text).value = '';
       //call the postTodo action creator to be dispatched to our reducers onClick
     }
   }, {
