@@ -7,7 +7,7 @@ import { addCompletedTodo } from '../../actions/completedTodosAction'
 import { deleteTodo, toggleTodo, updateTodo } from '../../actions/todoAction';
 
 class TodoItem extends Component {
-  handleCart() {
+  completeTodo() {
     const _id = this.props._id;
     const completed = this.props.completed
     const todo = [...this.props.todos, {
@@ -28,7 +28,7 @@ class TodoItem extends Component {
             style={{textDecoration: this.props.completed ? 'line-through' : 'none' }}>{this.props.title}</h4>
             <p style={{textDecoration: this.props.completed ? 'line-through' : 'none' }}>{this.props.text}</p>
             <Button 
-            onClick={this.handleCart.bind(this)}
+            onClick={this.completeTodo.bind(this)}
             bsStyle='primary'>Mark as Complete</Button>
           </Col>
         </Row>

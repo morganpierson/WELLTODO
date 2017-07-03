@@ -43441,8 +43441,8 @@ var TodoItem = function (_Component) {
   }
 
   _createClass(TodoItem, [{
-    key: 'handleCart',
-    value: function handleCart() {
+    key: 'completeTodo',
+    value: function completeTodo() {
       var _id = this.props._id;
       var completed = this.props.completed;
       var todo = [].concat(_toConsumableArray(this.props.todos), [{
@@ -43479,7 +43479,7 @@ var TodoItem = function (_Component) {
             _react2.default.createElement(
               _reactBootstrap.Button,
               {
-                onClick: this.handleCart.bind(this),
+                onClick: this.completeTodo.bind(this),
                 bsStyle: 'primary' },
               'Mark as Complete'
             )
