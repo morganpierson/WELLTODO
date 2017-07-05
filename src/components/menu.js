@@ -13,7 +13,7 @@ class Menu extends Component {
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
-      <Nav>
+      <Nav pullRight>
         <NavItem eventKey={1} href="/about">About the Developer</NavItem>
         <NavItem eventKey={2} href="/conact">Contact</NavItem>
       </Nav>
