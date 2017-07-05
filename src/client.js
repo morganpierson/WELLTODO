@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { 
@@ -21,7 +22,7 @@ import Footer from './components/footer';
 import TodoForm from './components/pages/TodoForm';
 import Main from './Main';
 
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(thunk, logger);
 const store = createStore(reducers, middleware);
 
 const Routes = (

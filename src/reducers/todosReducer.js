@@ -2,6 +2,9 @@ export const POST_TODO = 'POST_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const POST_TODO_REJECTED = 'POST_TODO_REJECTED';
+export const GET_TODOS_REJECTED = 'GET_TODOS_REJECTED';
+export const DELETE_TODO_REJECTED = 'DELETE_TODO_REJECTED';
 import { GET_TODOS } from '../actions/todoAction';
 
 export function todosReducer(state = {todos: 
@@ -10,7 +13,7 @@ export function todosReducer(state = {todos:
 }, action) {
   switch(action.type){
     case GET_TODOS:
-      return {...state, todos: [...state.todos]}
+      return {...state, todos: [...action.payload]}
     case POST_TODO:
       return {
         todos: [...state.todos,
@@ -24,7 +27,7 @@ export function todosReducer(state = {todos:
     //determine at which index in todos array is the todo to be deleted
     const indexToDelete = currentTodoToDelete.findIndex(
       function(todo){
-        return todo.title == action.payload
+        return todo._id == action.payload
       }
     )
     //use slice to delete todo at specific index

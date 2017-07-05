@@ -1,29 +1,54 @@
 "use strict";
+import axios from 'axios';
+
 import { 
   POST_TODO, 
   DELETE_TODO, 
   UPDATE_TODO, 
-  TOGGLE_TODO 
+  TOGGLE_TODO ,
+  POST_TODO_REJECTED,
+  GET_TODOS_REJECTED,
+  DELETE_TODO_REJECTED
 } from '../reducers/todosReducer'
 export const GET_TODOS = 'GET_TODOS';
 //Get todos
 export function getTodos() {
-  return {
-    type: GET_TODOS
+  return function(dispatch) {
+    axios.get('/todos')
+    .then(function(response) {
+      dispatch({ type: GET_TODOS, payload: response.data })
+    })
+    .catch(function(err) {
+      dispatch({ type: GET_TODOS_REJECTED, payload: err })
+    })
   }
 }
 
 //Post a todo
 export function postTodo(todo) {
-  return {
-    type: POST_TODO, payload: todo
-}
+  return function(dispatch) {
+    axios.post('/todos', todo)
+    .then(function(response) {
+      dispatch({ type: POST_TODO, payload: response.data })
+    })
+    .catch(function(err){
+      dispatch({ type: POST_TODO_REJECTED, payload: err })
+    })
+  }
+//   return {
+//     type: POST_TODO, payload: todo
+// }
 }
 //Delete a todo
-export function deleteTodo(title) {
-  return {
-    type: DELETE_TODO, 
-    payload: title
+export function deleteTodo(id) {
+  return function(dispatch) {
+    axios.delete(`/todos/${id}`)
+    .then(function(response) {
+      dispatch({ type: DELETE_TODO, payload: id })
+    })
+    .catch(function (err) {
+      dispatch({ type: DELETE_TODO_REJECTED, payload: err })
+    })
   }
 }
 

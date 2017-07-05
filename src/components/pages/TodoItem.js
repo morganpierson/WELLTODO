@@ -11,7 +11,6 @@ class TodoItem extends Component {
     const _id = this.props._id;
     const completed = this.props.completed
     const todo = [...this.props.todos, {
-      _id: this.props._id,
       title: this.props.title,
       text: this.props.text,
       completed: this.props.completed

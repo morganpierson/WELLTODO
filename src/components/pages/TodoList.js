@@ -18,7 +18,6 @@ class TodoList extends Component {
       return (
         <Row xs={12} sm={6} md={4} key={todo._id}>
           <TodoItem 
-            _id={todo._id}
             title={todo.title}
             text={todo.text}
             completed={todo.completed}

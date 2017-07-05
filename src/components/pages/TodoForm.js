@@ -18,7 +18,6 @@ class TodoForm extends Component {
     //findDOMNode is the same as using this.refs.title.value
     let _id = findDOMNode(this.refs.title).value
     const todo = [{
-      _id: findDOMNode(this.refs.title).value,
       title: findDOMNode(this.refs.title).value,
       text: findDOMNode(this.refs.text).value,
       completed: false
@@ -47,7 +46,7 @@ class TodoForm extends Component {
   render() {
     const listOfTodos = this.props.todos.map(todo => {
       return (
-        <option key={todo._id}>{todo.title}</option>
+        <option key={todo._id}>{todo._id}</option>
       )
     })
 
