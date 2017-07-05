@@ -14,7 +14,7 @@ export const GET_TODOS = 'GET_TODOS';
 //Get todos
 export function getTodos() {
   return function(dispatch) {
-    axios.get('/todos')
+    axios.get('/api/todos')
     .then(function(response) {
       dispatch({ type: GET_TODOS, payload: response.data })
     })
@@ -27,7 +27,7 @@ export function getTodos() {
 //Post a todo
 export function postTodo(todo) {
   return function(dispatch) {
-    axios.post('/todos', todo)
+    axios.post('/api/todos', todo)
     .then(function(response) {
       dispatch({ type: POST_TODO, payload: response.data })
     })
@@ -42,7 +42,7 @@ export function postTodo(todo) {
 //Delete a todo
 export function deleteTodo(id) {
   return function(dispatch) {
-    axios.delete(`/todos/${id}`)
+    axios.delete(`/api/todos/${id}`)
     .then(function(response) {
       dispatch({ type: DELETE_TODO, payload: id })
     })

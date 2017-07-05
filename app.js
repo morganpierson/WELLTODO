@@ -2,65 +2,27 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+//PROXY
+const httpProxy = require('http-proxy');
+
 
 var app = express();
 
+//PROXY to API
+const apiProxy = httpProxy.createProxyServer({
+  target: 'http://localhost:3001'
+})
+
+app.use('/api', (req, res) => {
+  apiProxy.web(req, res)
+})
+//END PROXY
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//API
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://username:password@ds143892.mlab.com:43892/welltodo')
-const Todos = require('./models/todos')
-
-//------> POST TODOS <------
-app.post('/todos', (req, res) => {
-  const todo = req.body;
-
-  Todos.create(todo, (err, todo) => {
-    if(err) {
-      throw err;
-    }
-
-    res.json(todo);
-  })
-});
-
-//------> GET TODOS <------
-app.get('/todos', (req, res) => {
-  Todos.find((err, todos) => {
-    if(err) {
-      throw err;
-    }
-
-    res.json(todos);
-  })
-})
-
-//-----> DELETE TODOS <-----
-app.delete('/todos/:_id', (req, res) => {
-  const query = {_id: req.params._id};
-
-  Todos.remove(query, (err, todo) => {
-    if(err) {
-      throw err;
-    }
-
-    res.json(todo)
-  })
-})
-//END API
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
