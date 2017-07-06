@@ -20,6 +20,7 @@ import TodoList from './components/pages/TodoList';
 import Menu from './components/menu';
 import Footer from './components/footer';
 import TodoForm from './components/pages/TodoForm';
+import About from './components/pages/aboutMe';
 import Main from './Main';
 
 const middleware = applyMiddleware(thunk, logger);
@@ -32,7 +33,7 @@ const Routes = (
         <Menu />
         <Switch>
           <Route exact path='/' component={TodoList} />
-          <Route path='admin' component={TodoForm} />
+          <Route path='/admin' component={About} />
         </Switch>
         <Footer />
       </div>
@@ -41,36 +42,3 @@ const Routes = (
 )
 
 render(Routes, document.getElementById('app'));
-//create and dispatch actions
-
-//define reducers
-
-//dispatch action CREATE
-// store.dispatch(postTodo([{
-//   id: 1,
-//   title: "First Todo",
-//   text: "This is the first todo",
-//   completed: false
-//   },
-//   {
-//     id: 2,
-//     title: 'Second Todo',
-//     text: 'This is the second todo',
-//     completed: false
-//   }
-// ]))
-
-// //dispatch another action DELETE
-
-//  store.dispatch(deleteTodo({id: 1}))
-
-// // //dispatch another action UPDATE
-// store.dispatch(updateTodo({
-//     id: 2,
-//     title: "New Second Todo",
-//     text: 'This is the second todo updated',
-//     completed: false
-//   }))
-
-// //COMPLETED TODOS actions 
-// store.dispatch(addCompletedTodo([{id: 1}]))

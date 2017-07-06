@@ -37,13 +37,16 @@ export function todosReducer(state = {todos:
     case TOGGLE_TODO:
       //create copy of current list of todo
     const currentTodoToUpdate = [...state.todos]
+  
     //determine at which index in todos array is the todo to be updated
     const indexToUpdate = currentTodoToUpdate.findIndex(
       function(todo){
+        console.log("TODO: ", todo)
+        console.log('ACTION: ', action)
         return todo._id === action._id
       }
     )
-
+    //console.log('CURRENT TODO TO UPDATE AT INDEX TO UPDATE: ', currentTodoToUpdate[indexToUpdate])
     //create a new todo object with new values and with same array index of the item we want to update/replace 
     const newTodoToUpdate = {
       ...currentTodoToUpdate[indexToUpdate],

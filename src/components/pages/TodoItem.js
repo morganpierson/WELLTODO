@@ -5,17 +5,20 @@ import { findDOMNode } from 'react-dom'
 import { bindActionCreators } from 'redux';
 import { addCompletedTodo } from '../../actions/completedTodosAction'
 import { deleteTodo, toggleTodo, updateTodo } from '../../actions/todoAction';
+import axios from 'axios';
 
 class TodoItem extends Component {
+  
+
   completeTodo() {
     const _id = this.props._id;
     const completed = this.props.completed
     const todo = [...this.props.todos, {
+      _id: this.props._id,
       title: this.props.title,
       text: this.props.text,
       completed: this.props.completed
     }]
-    console.log(todo)
     this.props.toggleTodo(_id, !completed)
   }
 

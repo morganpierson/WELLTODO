@@ -14,8 +14,7 @@ class Menu extends Component {
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav pullRight>
-        <NavItem eventKey={1} href="/about">About the Developer</NavItem>
-        <NavItem eventKey={2} href="/conact">Contact</NavItem>
+        <NavItem eventKey={1} href="/admin">About the Developer</NavItem>
       </Nav>
     </Navbar.Collapse>
   </Navbar>

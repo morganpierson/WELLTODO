@@ -17,7 +17,8 @@ class TodoList extends Component {
     const todos = this.props.todos.map(todo => {
       return (
         <Row xs={12} sm={6} md={4} key={todo._id}>
-          <TodoItem 
+          <TodoItem
+            _id={todo._id} 
             title={todo.title}
             text={todo.text}
             completed={todo.completed}

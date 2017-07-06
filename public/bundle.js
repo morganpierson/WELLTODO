@@ -10262,11 +10262,14 @@ function todosReducer() {
     case TOGGLE_TODO:
       //create copy of current list of todo
       var currentTodoToUpdate = [].concat(_toConsumableArray(state.todos));
+
       //determine at which index in todos array is the todo to be updated
       var indexToUpdate = currentTodoToUpdate.findIndex(function (todo) {
+        console.log("TODO: ", todo);
+        console.log('ACTION: ', action);
         return todo._id === action._id;
       });
-
+      //console.log('CURRENT TODO TO UPDATE AT INDEX TO UPDATE: ', currentTodoToUpdate[indexToUpdate])
       //create a new todo object with new values and with same array index of the item we want to update/replace 
       var newTodoToUpdate = _extends({}, currentTodoToUpdate[indexToUpdate], {
         completed: !currentTodoToUpdate[indexToUpdate].completed
@@ -20816,13 +20819,8 @@ var Menu = function (_Component) {
             { pullRight: true },
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '/about' },
+              { eventKey: 1, href: '/admin' },
               'About the Developer'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.NavItem,
-              { eventKey: 2, href: '/conact' },
-              'Contact'
             )
           )
         )
@@ -20948,6 +20946,10 @@ var _TodoForm = __webpack_require__(237);
 
 var _TodoForm2 = _interopRequireDefault(_TodoForm);
 
+var _aboutMe = __webpack_require__(553);
+
+var _aboutMe2 = _interopRequireDefault(_aboutMe);
+
 var _Main = __webpack_require__(552);
 
 var _Main2 = _interopRequireDefault(_Main);
@@ -20971,7 +20973,7 @@ var Routes = _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _TodoList2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: 'admin', component: _TodoForm2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _aboutMe2.default })
       ),
       _react2.default.createElement(_footer2.default, null)
     )
@@ -20979,39 +20981,6 @@ var Routes = _react2.default.createElement(
 );
 
 (0, _reactDom.render)(Routes, document.getElementById('app'));
-//create and dispatch actions
-
-//define reducers
-
-//dispatch action CREATE
-// store.dispatch(postTodo([{
-//   id: 1,
-//   title: "First Todo",
-//   text: "This is the first todo",
-//   completed: false
-//   },
-//   {
-//     id: 2,
-//     title: 'Second Todo',
-//     text: 'This is the second todo',
-//     completed: false
-//   }
-// ]))
-
-// //dispatch another action DELETE
-
-//  store.dispatch(deleteTodo({id: 1}))
-
-// // //dispatch another action UPDATE
-// store.dispatch(updateTodo({
-//     id: 2,
-//     title: "New Second Todo",
-//     text: 'This is the second todo updated',
-//     completed: false
-//   }))
-
-// //COMPLETED TODOS actions 
-// store.dispatch(addCompletedTodo([{id: 1}]))
 
 /***/ }),
 /* 241 */
@@ -37594,6 +37563,7 @@ var TodoList = function (_Component) {
           _reactBootstrap.Row,
           { xs: 12, sm: 6, md: 4, key: todo._id },
           _react2.default.createElement(_TodoItem2.default, {
+            _id: todo._id,
             title: todo.title,
             text: todo.text,
             completed: todo.completed
@@ -48420,6 +48390,10 @@ var _completedTodosAction = __webpack_require__(191);
 
 var _todoAction = __webpack_require__(61);
 
+var _axios = __webpack_require__(393);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -48445,11 +48419,11 @@ var TodoItem = function (_Component) {
       var _id = this.props._id;
       var completed = this.props.completed;
       var todo = [].concat(_toConsumableArray(this.props.todos), [{
+        _id: this.props._id,
         title: this.props.title,
         text: this.props.text,
         completed: this.props.completed
       }]);
-      console.log(todo);
       this.props.toggleTodo(_id, !completed);
     }
   }, {
@@ -48662,6 +48636,43 @@ var Main = function (_Component) {
 }(_react.Component);
 
 exports.default = Main;
+
+/***/ }),
+/* 553 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(62);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var About = function About() {
+  return _react2.default.createElement(
+    _reactBootstrap.Well,
+    { style: { textAlign: 'center', fontWeight: 'bold' } },
+    _react2.default.createElement(
+      _reactBootstrap.Panel,
+      null,
+      _react2.default.createElement(
+        'p',
+        null,
+        'My name is Morgan Pierson. I am a fullstack Javascript developer. I love the ocean and music, and I am a big fan of all things tech. I can be contacted directly via email at morganpierson@gmail.com'
+      )
+    )
+  );
+};
+
+exports.default = About;
 
 /***/ })
 /******/ ]);
